@@ -9,12 +9,12 @@ module.exports = {
     clean: true,
   },
   resolve: {
-    extensions: [".tsx", ".ts", ".js"],
+    extensions: [".js", ".jsx", ".ts", ".tsx"],
   },
   module: {
     rules: [
       {
-        test: /\.(ts|js)x?$/,
+        test: /\.(js|jsx)?$/,
         exclude: /node_modules/,
         use: [
           {
@@ -22,12 +22,17 @@ module.exports = {
             options: {
               presets: [
                 "@babel/preset-env",
-                ["@babel/preset-react", { runtime: "automatic" }],
-                "@babel/preset-typescript",
+                "@babel/preset-react",
+                ["@babel/preset-typescript", { runtime: "automatic" }],
               ],
             },
           },
         ],
+      },
+      {
+        test: /\.(ts|tsx)$/,
+        use: "ts-loader",
+        exclude: /node_modules/,
       },
       {
         test: /\.css$/i,
